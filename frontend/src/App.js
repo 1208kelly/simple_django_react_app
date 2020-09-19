@@ -11,12 +11,12 @@ class App extends React.Component {
                         <form id="form">
                             <div className="flex-wrapper">
                                 <div style={{flex: 6}}>
-                                    <input className="form-control" id="title" type="text" name="title" placeholder="Add Task"></input>
+                                    <input className="form-control" id="title" type="text" name="title" placeholder="Add task.."></input>
                                 </div>
-                            </div>
 
-                            <div style={{flex: 1}}>
-                                <input id="submit" className="btn btn-warning" type="submit" name="Add"></input>
+                                <div style={{flex: 1}}>
+                                    <input id="submit" className="btn btn-warning" type="submit" name="Add"></input>
+                                </div>
                             </div>
                         </form>
                     </div>
