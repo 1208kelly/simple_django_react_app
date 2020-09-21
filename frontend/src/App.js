@@ -27,12 +27,15 @@ class App extends React.Component {
         fetch('https://8000-b70d03e8-2862-46b8-ae0c-74f87d8dec7e.ws-eu01.gitpod.io/api/task-list/')
         .then(response => response.json())
         .then(data =>
-            console.log('Data', data)
+            this.setState({
+                todoList: data
+            })
             )
     }
 
 
     render(){
+        var tasks = this.state.todoList
         return(
             <div className="container">
                 <div id="task-container">
@@ -50,6 +53,21 @@ class App extends React.Component {
                         </form>
                     </div>
                     <div id="list-wrapper">
+                        {tasks.map(function(task, index){
+                            return(
+                                <div key={index} className="task-wrapper flex-wrapper">
+                                    <div style={{flex: 7}}>
+                                        <span>{task.title}</span>
+                                    </div>
+                                    <div style={{flex: 1}}>
+                                        <button className="btn btn-sm btn-outline-info">Edit</button>
+                                    </div>
+                                    <div style={{flex: 1}}>
+                                        <button className="btn btn-sm btn-outline-dark delete">-</button>
+                                    </div>
+                                </div>
+                                )
+                            })}
                     </div>
                 </div>
             </div>
