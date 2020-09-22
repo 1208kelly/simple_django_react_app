@@ -62,7 +62,9 @@ ROOT_URLCONF = 'simple_django_react_app.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'frontend/build')
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -127,9 +129,13 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
-    "https://3000-b88e182e-e0c7-4c68-a972-a8998105efe8.ws-eu01.gitpod.io",
+
+STATICFILES_DIRS = [
+     os.path.join(BASE_DIR, 'frontend/build/static')
 ]
 
-Access-Control-Allow-Origin: "https://3000-b88e182e-e0c7-4c68-a972-a8998105efe8.ws-eu01.gitpod.io"
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "http://10.56.11.174:3000",
+]

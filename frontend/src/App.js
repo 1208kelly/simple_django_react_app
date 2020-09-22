@@ -13,29 +13,29 @@ class App extends React.Component {
                     completed: false,
                 },
                 editing: false,
-            }
-            this.fetchTasks = this.fetchTasks.bind(this)
-    };
+            };
+            this.fetchTasks = this.fetchTasks.bind(this);
+    }
 
     componentWillMount(){
-        this.fetchTasks()
+        this.fetchTasks();
     }
 
     fetchTasks(){
-        console.log('Fetching...')
+        console.log('Fetching...');
 
-        fetch('https://3000-b70d03e8-2862-46b8-ae0c-74f87d8dec7e.ws-eu01.gitpod.io')
+        fetch('http://127.0.0.1:8000/api/task-list/')
         .then(response => response.json())
         .then(data =>
             this.setState({
                 todoList: data
             })
-            )
+            );
     }
 
 
     render(){
-        var tasks = this.state.todoList
+        var tasks = this.state.todoList;
         return(
             <div className="container">
                 <div id="task-container">
@@ -43,11 +43,11 @@ class App extends React.Component {
                         <form id="form">
                             <div className="flex-wrapper">
                                 <div style={{flex: 6}}>
-                                    <input className="form-control" id="title" type="text" name="title" placeholder="Add task.."></input>
+                                    <input className="form-control" id="title" type="text" name="title" placeholder="Add task.." />
                                 </div>
 
                                 <div style={{flex: 1}}>
-                                    <input id="submit" className="btn btn-warning" type="submit" name="Add"></input>
+                                    <input id="submit" className="btn btn-warning" type="submit" name="Add" />
                                 </div>
                             </div>
                         </form>
