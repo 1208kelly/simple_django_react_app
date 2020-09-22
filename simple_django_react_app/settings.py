@@ -129,4 +129,7 @@ STATIC_URL = '/static/'
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
+    "https://3000-b88e182e-e0c7-4c68-a972-a8998105efe8.ws-eu01.gitpod.io",
 ]
+
+Access-Control-Allow-Origin: "https://3000-b88e182e-e0c7-4c68-a972-a8998105efe8.ws-eu01.gitpod.io"

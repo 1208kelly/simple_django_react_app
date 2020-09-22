@@ -24,7 +24,7 @@ class App extends React.Component {
     fetchTasks(){
         console.log('Fetching...')
 
-        fetch('https://8000-b70d03e8-2862-46b8-ae0c-74f87d8dec7e.ws-eu01.gitpod.io/api/task-list/')
+        fetch('https://3000-b70d03e8-2862-46b8-ae0c-74f87d8dec7e.ws-eu01.gitpod.io')
         .then(response => response.json())
         .then(data =>
             this.setState({
