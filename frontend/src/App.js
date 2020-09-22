@@ -34,6 +34,21 @@ class App extends React.Component {
     }
 
 
+    handleChange(e){
+        var name = e.target.name
+        var value = e.target.value
+        console.log('Name:', name)
+        console.log('Value:', value)
+
+        this.setState({
+            activeItem:{
+                ...this.state.activeItem,
+                title:value
+            }
+        })
+    }
+
+
     render(){
         var tasks = this.state.todoList;
         return(
