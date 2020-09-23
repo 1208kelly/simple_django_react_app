@@ -55,7 +55,7 @@ class App extends React.Component {
             this.setState({
                 todoList: data
             })
-            );
+        );
     }
 
 
