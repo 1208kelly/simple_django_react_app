@@ -98,11 +98,15 @@ class App extends React.Component {
                     completed: false,
                 }
             })
-        }).catch(function(error){
-            console.log('ERROR:', error)
-        })
+        }).catch(function(err){
+            if (err)
+                return res.send(err);
 
-    }
+            res.json({
+                message: 'Read file!'
+        });
+
+    },
 
 
     render(){
