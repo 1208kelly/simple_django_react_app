@@ -17,7 +17,26 @@ class App extends React.Component {
             this.fetchTasks = this.fetchTasks.bind(this)
             this.handleChange = this.handleChange.bind(this)
             this.handleSubmit = this.handleSubmit.bind(this)
+            this.getCookie = this.getCookie.bind(this)
     }
+
+
+    getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
 
     componentWillMount(){
         this.fetchTasks();
@@ -26,8 +45,12 @@ class App extends React.Component {
     fetchTasks(){
         console.log('Fetching...');
 
-        fetch('http://127.0.0.1:8000/api/task-list/')
-        .then(response => response.json())
+        fetch('http://127.0.0.1:8000/api/task-list/', {
+            method: "POST",
+            headers: {
+                "Content-Type": "text/plain"
+            },
+        }).then(response => response.json())
         .then(data =>
             this.setState({
                 todoList: data
@@ -55,12 +78,15 @@ class App extends React.Component {
         e.preventDefault()
         console.log('ITEM:', this.state.activeItem)
 
+        var csrftoken = this.getCookie('csrftoken');
+
         var url = 'http://127.0.0.1:8000/api/task-create/'
 
         fetch(url, {
             method:'POST',
             headers:{
                 'Content-type':'application/json',
+                'X-CSRFToken': csrftoken,
             },
             body:JSON.stringify(this.state.activeItem)
         }).then((response) => {
