@@ -48,7 +48,7 @@ class App extends React.Component {
     fetchTasks(){
         console.log('Fetching...');
 
-        fetch('http://127.0.0.1:8000/api/task-list/')
+        fetch('http://127.0.0.1:8000/api/task-list')
         .then(response => response.json())
         .then(data =>
             this.setState({
