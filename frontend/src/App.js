@@ -20,6 +20,7 @@ class App extends React.Component {
             this.getCookie = this.getCookie.bind(this)
             this.startEdit = this.startEdit.bind(this)
             this.deleteItem = this.deleteItem.bind(this)
+            this.strikeUnstrike = this.strikeUnstrike.bind(this)
     }
 
 
@@ -121,15 +122,35 @@ class App extends React.Component {
         var csrftoken = this.getCookie('csrftoken')
 
         fetch(`http://127.0.0.1:8000/api/task-delete/${task.id}/`, {
-        method:'DELETE',
-        headers:{
-            'Content-type':'application/json',
-            'X-CSRFToken':csrftoken,
-        },
+            method:'DELETE',
+            headers:{
+                'Content-type':'application/json',
+                'X-CSRFToken':csrftoken,
+            },
         }).then((response) =>{
 
         this.fetchTasks()
         })
+    }
+
+
+    strikeUnstrike(task){
+        task.completed = !task.completed
+        var csrftoken = this.getCookie('csrftoken')
+        var url = `http://127.0.0.1:8000/api/task-update/${task.id}/`
+
+        fetch(url, {
+            method:'POST',
+            headers:{
+                'Content-type':'application/json',
+                'X-CSRFToken':csrftoken,
+            },
+            body:JSON.stringify({'completed': task.completed, 'title':task.title})
+        }).then(() => {
+            this.fetchTasks()
+        })
+
+        console.log('TASK:', task.completed)
     }
 
 
@@ -152,12 +173,19 @@ class App extends React.Component {
                             </div>
                         </form>
                     </div>
+
                     <div id="list-wrapper">
                         {tasks.map(function(task, index){
                             return(
                                 <div key={index} className="task-wrapper flex-wrapper">
-                                    <div style={{flex: 7}}>
-                                        <span>{task.title}</span>
+                                    <div onClick={() => self.strikeUnstrike(task)} style={{flex: 7}}>
+                                        {task.completed == false ? (
+                                            <span>{task.title}</span>
+
+                                        ) : (
+
+                                            <strike>{task.title}</strike>
+                                        )}
                                     </div>
                                     <div style={{flex: 1}}>
                                         <button onClick={() => self.startEdit(task)} className="btn btn-sm btn-outline-info">Edit</button>
